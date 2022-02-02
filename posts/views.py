@@ -68,6 +68,8 @@ def detail(request,id):
                 return redirect('detail', posts.id)
             except:
                 print('Error')
+
+
         if 'comments_comment' in request.POST:
             id = int(request.POST.get('comments_comment'))
             comment_obj = Comment.objects.get(id=id)
@@ -77,6 +79,8 @@ def detail(request,id):
                 return redirect('detail', posts.id)
             except:
                 print('ERROR')
+        
+        
         if 'like' in request.POST:
             try:
                 like = Like.objects.get(user=request.user,post = posts)

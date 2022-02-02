@@ -12,6 +12,10 @@ class Post(models.Model):
         return f'{self.title}======={self.creat_at}'
 
 
+    def get_parent(self):
+        return self.comment_post.filter(parent__isnull=True)
+
+
 class Like(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='like_user')
     post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='like_post')

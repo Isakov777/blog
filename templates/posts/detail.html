@@ -97,7 +97,7 @@
         </div>
         <div class="comments-area">
             <h4>{{ posts.comment.all.count }} Comments</h4>
-            {% for comment in posts.comment_post.all %}
+            {% for comment in posts.get_parent.all %}
                 <div class="comment-list">
                     <div class="single-comment justify-content-between d-flex">
                         <div class="user justify-content-between d-flex">
@@ -110,6 +110,13 @@
                                 <p class="comment">
                                     {{ comment.text }}
                                 </p>
+                                <div class="container">
+                                    <a href="{% url 'update_comment' comment.id %}">
+                                        <button class="btn btn-success">Update</button>
+                                    </a>
+                                    
+                
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -135,7 +142,7 @@
                     <form method="post">
                         {% csrf_token %}
                         <div class="form-group">
-                            <input type="hidden" name="comments_comment" value="{{ comment.id }}">
+                            <input type="hidden" name="comments_comment" value="{{ reply.id }}">
                             <textarea class="form-control mb-10" rows="5" name="text" placeholder="Messege"
                                     onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'"
                                     required=""></textarea>
